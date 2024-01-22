@@ -48,7 +48,6 @@ infragenus() is used to implement retrieval from IFPNI's infragenus list accrodi
 ty_infragenus <- infragenus("ty")
 nrow(ty_infragenus)
 # [1] 16
-# What are they?
 ty_infragenus$Name
  #[1] "Anomozamites Platypterygium"        "Calamites Arthropitys"
  #[3] "Calamites Arthropitys"              "Calamites Stylocalamites"
@@ -63,6 +62,5 @@ ty_infragenus$Name
 
 # Let's try the most daring operation.
 # If you do not pass a value to any argument, you get a dataframe that stores the details of all the taxa in the infragenus list on IFPNI.
-# all_infragenus_20231109 <- infragenus()
-# This operation may take more than ten minutes. See data/all_infragenus_20231109.rda for the result.
+# all_infragenus <- infragenus()
 }

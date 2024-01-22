@@ -16,5 +16,6 @@ A dataframe with detailed information of result.
 basic_graber returns the information of each items according to retrieved result.
 }
 \examples{
-# df <- basic_graber(basic_supragenus("cla",searchOnlyByFirstSymbols = "on"))
+# supra_cla <- basic_graber(basic_supragenus("cla",searchOnlyByFirstSymbols = "on"))
+# genus_cla <- basic_graber(basic_genus("cla",searchOnlyByFirstSymbols = "on"))
 }

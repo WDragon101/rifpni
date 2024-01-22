@@ -17,15 +17,13 @@ Get brief information return by basic_url, a dataframe contains "Name" and "URL"
 }
 \examples{
 # Build initial URL
-cla_basic_url <- basic_supragenus("cla", searchOnlyByFirstSymbols = "on")
+# cla_basic_url <- basic_supragenus("cla", searchOnlyByFirstSymbols = "on")
+
 # Get the result entry based on the initial URL and generate a dataframe containing Name and URL.
-cla_brief_information <- brief_information(cla_basic_url)
+
+# cla_brief_information <- brief_information(cla_basic_url)
 # View entries
 cla_brief_information$Name
-# [1] "Cladophoraceae"       "Cladophorales"        "Cladoxylaceae"        "Cladoxylaceae"        "Cladoxylales"
-# [6] "Cladoxyleae"          "Cladoxylidae"         "Cladoxylophyta"       "Cladoxylopsida"       "Claracrustoideae"
-# [11] "Clavaphysoporelleae"  "Clavaphysoporellinae" "Clavatoraceae"        "Clavatorales"         "Clavatorales"
-# [16] "Clavatoreae"          "Clavatoritoideae"     "Clavatoroideae"
 
 # Select entries and build a vector of URLs. Note: there are two "Clavatorales".
 slt_cla_URLs <- cla_brief_information$URL[cla_brief_information$Name\%in\%c("Cladophorales", "Clavatorales", "Clavatoroideae")]
@@ -39,20 +37,5 @@ slt_cla_URLs
 detail_slt_cla <- detail_graber(slt_cla_URLs)
 str(detail_slt_cla)
 
-#'data.frame':	4 obs. of  14 variables:
-#$ Name             : chr  "Cladophorales" "Clavatorales" "Clavatorales" "Clavatoroideae"
-#$ Rank             : chr  "Order" "Order" "Order" "Subfamily"
-#$ Non.fossil       : chr  "Yes" NA NA NA
-#$ Original.spelling: chr  "Cladophorinae" NA "Clavaterales" NA
-#$ Authors..Name.   : chr  "Prantl K. A. E. " NA NA NA
-#$ Page.number      : chr  "Lehrb. Bot. ed. 5: 131. 1884" "47" "177" "880"
-#$ Parent.Taxon     : chr  "[Class] Siphonocladophyceae" "[Class] Charophyceae" "[Class] Charophyceae" "[Family] Clavatoraceae"
-#$ Type             : chr  "[Genus] Cladophora" "[Genus] Clavator" "[Genus] Clavator" "[Genus] Clavator"
-#$ Authors..Pub..   : chr  NA "Maslov V. P. " "Pojarkov B. V. " "Grambast L. "
-#$ Publication      : chr  NA "Vvedenie v izuchenie iskopaemykh kharovykh vodoroslej [1963/5]" "Devonskie kharofity Tjan'-Shanja [1966/5]" "La symétrie de l'utricule chez les Clavatoracées et sa signification phylogénétique [1969/9]"
-#$ Journal          : chr  NA "Trudy Geologicheskogo Instituta Akademii Nauk SSSR" "Trudy Geologicheskogo Instituta Akademii Nauk SSSR" "Compte rendu hebdomadaire des séances de l’Académie des Sciences, Paris"
-#$ Issue            : chr  NA "82" "143" NA
-#$ Year             : chr  NA "1963" "1966" "1969"
-#$ Volume           : chr  NA NA NA "269"
 
 }
