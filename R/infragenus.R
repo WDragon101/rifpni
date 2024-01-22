@@ -82,7 +82,6 @@ basic_infragenus <-
 #' ty_infragenus <- infragenus("ty")
 #' nrow(ty_infragenus)
 #' # [1] 16
-#' # What are they?
 #' ty_infragenus$Name
 #'  #[1] "Anomozamites Platypterygium"        "Calamites Arthropitys"
 #'  #[3] "Calamites Arthropitys"              "Calamites Stylocalamites"
@@ -97,8 +96,7 @@ basic_infragenus <-
 #'
 #' # Let's try the most daring operation.
 #' # If you do not pass a value to any argument, you get a dataframe that stores the details of all the taxa in the infragenus list on IFPNI.
-#' # all_infragenus_20231109 <- infragenus()
-#' # This operation may take more than ten minutes. See data/all_infragenus_20231109.rda for the result.
+#' # all_infragenus <- infragenus()
 
 infragenus <- function(name=NULL,
                   searchOnlyByFirstSymbols = "",
@@ -109,6 +107,7 @@ infragenus <- function(name=NULL,
                   yearFrom = "",
                   yearTo = "",
                   rank = FALSE){
+  cli_h1(paste("Executing",col_green(style_italic("infragenus")) ,"function" ))
   url <- basic_infragenus(name = name,searchOnlyByFirstSymbols = searchOnlyByFirstSymbols,
                      order=order, orderDirection = orderDirection,author=author,
                      originalSpelling = originalSpelling,yearFrom = yearFrom,
