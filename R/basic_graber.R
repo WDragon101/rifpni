@@ -11,7 +11,7 @@
 #' @import rvest
 #' @import dplyr
 basic_graber <- function(basic_url) {
-  f <- read_html(basic_url)
+  f <- read_html(basic_url, timeout=10)
 
   pages_url <- c()
   if (!is.na(html_node(f, "a.paging_toEnd"))) {
@@ -48,7 +48,7 @@ basic_graber <- function(basic_url) {
   temp_df <- data.frame()
   for (i in c(1:length(items_url))){
     item <- items_url[i]
-    dl <- read_html(item) %>% html_node("dl.dl-horizontal")
+    dl <- read_html(item, timeout=10) %>% html_node("dl.dl-horizontal")
     dt <- dl %>% html_nodes("dt") %>% html_text2()
     dd <- dl %>% html_nodes("dd") %>% html_text2()
     dd <- gsub("\r", "", dd)
@@ -116,7 +116,7 @@ basic_graber <- function(basic_url) {
 #'
 brief_information <- function(basic_url){
   pages_url <- c(basic_url)
-  f <- read_html(basic_url)
+  f <- read_html(basic_url, timeout=10)
 
   if (!is.na(html_node(f, "a.paging_toEnd"))) {
     end_page <-
@@ -154,7 +154,7 @@ detail_graber <- function(items_url){
   temp_df <- data.frame()
   for (i in c(1:length(items_url))){
     item <- items_url[i]
-    dl <- read_html(item) %>% html_node("dl.dl-horizontal")
+    dl <- read_html(item, timeout=10) %>% html_node("dl.dl-horizontal")
     dt <- dl %>% html_nodes("dt") %>% html_text2()
     dd <- dl %>% html_nodes("dd") %>% html_text2()
     dd <- gsub("\r", "", dd)
