@@ -4,7 +4,7 @@
 \alias{detail_graber}
 \title{Get detail information of selected items' URLs that should be prepared by brief_information.}
 \usage{
-detail_graber(items_url)
+detail_graber(items_url, output_file = "")
 }
 \arguments{
 \item{items_url}{Selected items' URLs.}
@@ -16,6 +16,18 @@ A dataframe contains detail information
 Get detail information of selected items' URLs that should be prepared by brief_information.
 }
 \examples{
-###no example.
+brief_all_genus_urls <- read.csv("./data/brief_all_genus.csv")$URL
+
+while (TRUE) {
+tryCatch({
+all_genus_info <- detail_graber(brief_all_genus_urls, output_file = "./data/all_genus_info.csv")
+}, warning = function(w){
+cat("warning")
+Sys.sleep(100)
+}, error = function(e){
+cat("error")
+Sys.sleep(100)
+})
+}
 
 }
