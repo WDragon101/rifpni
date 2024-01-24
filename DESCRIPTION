@@ -2,9 +2,9 @@ Package: rifpni
 Title: Access and manipulate IFPNI.(2024/1/22)
 Version: 0.0.0.9001
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person("Bailong", "Zhao", , "bailongzhao@163.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0006-4511-3043"))
+Description: The rifpni package provides useful functions as access and retrieve data from The INTERNATIONAL FOSSIL PLANT NAMES INDEX.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
