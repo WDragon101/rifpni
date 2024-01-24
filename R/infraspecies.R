@@ -126,6 +126,7 @@ infraspecies <- function(name=NULL,
                     yearTo = "",
                     rank = FALSE,
                     paleoregion=FALSE){
+  cli_h1(paste("Executing",col_green(style_italic("infraspecies")) ,"function" ))
   url <- basic_infraspecies(name = name,searchOnlyByFirstSymbols = searchOnlyByFirstSymbols,
                        order=order, orderDirection = orderDirection,author=author,
                        originalSpelling = originalSpelling,yearFrom = yearFrom,

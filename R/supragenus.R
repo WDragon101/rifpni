@@ -83,10 +83,11 @@ basic_supragenus <- function(name=NULL,
 #'
 #' # Get all items of supragenus
 #' # all_supragenus <- supragenus()
-#' ✔ There are 205 pages found.
-#' Collected 205 pages from IFPNI. Elapsed Time: 00:05:31.9
-#' ✔ There are 2049items found.
-#' Collected 2049 items from IFPNI. Costed 00:51:41
+#' #
+#' # ✔ There are 205 pages found.
+#' # Collected 205 pages from IFPNI. Elapsed Time: 00:05:31.9
+#' # ✔ There are 2049items found.
+#' # Collected 2049 items from IFPNI. Costed 00:51:41
 #' # see rifpni/data/all_supragenus_info.csv
 
 supragenus <- function(name=NULL,

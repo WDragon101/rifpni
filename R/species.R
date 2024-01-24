@@ -138,6 +138,7 @@ species <- function(name=NULL,
                        yearTo = "",
                        rank = FALSE,
                     paleoregion=FALSE){
+  cli_h1(paste("Executing",col_green(style_italic("species")) ,"function" ))
   url <- basic_species(name = name,searchOnlyByFirstSymbols = searchOnlyByFirstSymbols,
                           order=order, orderDirection = orderDirection,author=author,
                           originalSpelling = originalSpelling,yearFrom = yearFrom,

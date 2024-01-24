@@ -140,10 +140,34 @@ brief_information <- function(basic_url){
 #' @return A dataframe contains detail information
 #' @export
 #'
-#' @examples ###no example.
+#' @examples
+#' brief_all_genus_urls <- read.csv("./data/brief_all_genus.csv")$URL
 #'
-detail_graber <- function(items_url){
+#' while (TRUE) {
+#' tryCatch({
+#' all_genus_info <- detail_graber(brief_all_genus_urls, output_file = "./data/all_genus_info.csv")
+#' }, warning = function(w){
+#' cat("warning")
+#' Sys.sleep(100)
+#' }, error = function(e){
+#' cat("error")
+#' Sys.sleep(100)
+#' })
+#' }
+
+#'
+detail_graber <- function(items_url, output_file = ""){
   temp_df <- data.frame()
+  exist_ids <- c()
+  if (!file.exists(output_file)){
+    file.create(output_file)
+  }
+  if (file.info(output_file)$size>0) {
+    temp_df <- read.csv(output_file)
+    temp_df <- as.data.frame(lapply(temp_df, as.character), stringAsFactors = FALSE)
+    exist_ids <- temp_df$ID
+  }
+
   cli_progress_bar("Collecting items:",
                    total = length(items_url),
                    clear = FALSE,
@@ -151,18 +175,23 @@ detail_graber <- function(items_url){
                    format_done = "Collected {pb_total} items from IFPNI. Elapsed Time: {pb_elapsed_clock}")
   for (i in c(1:length(items_url))){
     item <- items_url[i]
-    dl <- read_html(item, timeout = 10) %>% html_node("dl.dl-horizontal")
-    dt <- dl %>% html_nodes("dt") %>% html_text2()
-    dd <- dl %>% html_nodes("dd") %>% html_text2()
-    dd <- gsub("\r", "", dd)
-    names(dd) <- dt
-    df <- data.frame(as.list(dd))
-    if (i>1){
-      suppressMessages(
-        temp_df <- full_join(temp_df, df))
-    }else{temp_df <- df}
+    item_id <- strsplit(items_url[i],"=")[[1]][-1]
+    if (!item_id %in% exist_ids){
+      dl <- read_html(item, timeout = 10) %>% html_node("dl.dl-horizontal")
+      dt <- dl %>% html_nodes("dt") %>% html_text2()
+      dd <- dl %>% html_nodes("dd") %>% html_text2()
+      dd <- gsub("\r", "", dd)
+      names(dd) <- dt
+      df <- data.frame(as.list(dd))
+      df$ID <- strsplit(items_url[i],"=")[[1]][-1]
+      if (i>1){
+        suppressMessages(
+          temp_df <- full_join(temp_df, df))
+      }else{temp_df <- df}
+      write.csv(temp_df, output_file, row.names = FALSE)
+      Sys.sleep(1/3)
+    }
     cli_progress_update()
-    Sys.sleep(1/3)
   }
   cli_progress_done()
   cli_rule("Done")
