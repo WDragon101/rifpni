@@ -4,9 +4,10 @@
 # rifpni
 
 <!-- badges: start -->
-<!-- badges: end -->
 
 The goal of rifpni is to grab information from IFPNI.
+
+<!-- badges: end -->
 
 ## Installation
 
@@ -14,11 +15,25 @@ You can install the development version of rifpni like so:
 
 ``` r
 # FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
-devtools::install_github()
+devtools::install_github("/WDragon101/rifpni")
 ```
 
 ## Example
 
-Building …
+This package is building …
 
-Now availalbe functions: - supragenus() - genus()
+Now rifpni has functions:
+
+- supragenus()
+
+- genus()
+
+- infragenus()
+
+- species()
+
+- infraspecies()
+
+## Cite
+
+Not published.
