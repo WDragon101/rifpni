@@ -115,8 +115,7 @@ brief_information <- function(basic_url, output_file = "") {
   }
   if (file.info(output_file)$size > 0) {
     temp_df <- read.csv(output_file)
-    temp_df <-
-      as.data.frame(lapply(temp_df, as.character), stringAsFactors = FALSE)
+    temp_df <- as.data.frame(lapply(temp_df, as.character), stringsAsFactors = FALSE)
     exist_items <- temp_df$URL
     all_urls <- temp_df$URL
     all_names <- temp_df$Name
