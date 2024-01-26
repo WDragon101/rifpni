@@ -115,14 +115,13 @@ brief_information <- function(basic_url, output_file = "") {
   }
   if (file.info(output_file)$size > 0) {
     temp_df <- read.csv(output_file)
-    temp_df <- as.data.frame(lapply(temp_df, as.character), stringsAsFactors = FALSE)
+    temp_df <-
+      as.data.frame(lapply(temp_df, as.character), stringsAsFactors = FALSE)
     exist_items <- temp_df$URL
     all_urls <- temp_df$URL
     all_names <- temp_df$Name
-    done_page <- trunc(length(exist_items) / 10)
+    done_page <- length(exist_items) / 10
   }
-
-
   for (i in 1:length(pages_url)) {
     if (i > done_page) {
       h <- read_html(pages_url[i], timeout = 10)
@@ -131,19 +130,24 @@ brief_information <- function(basic_url, output_file = "") {
       page_names <-
         h %>% html_nodes("span.nameInList") %>% html_text2()
       # page_names <- sub(".*? ","", page_names)
+      if (i - done_page > 1) {
+        page_urls <- paste0("http://ifpni.org", hrefs)
+        all_urls <- append(all_urls, page_urls)
+        all_names <- append(all_names, page_names)
+      } else {
+        for (j in 1:length(hrefs)) {
+          item_url <- paste0(c("http://ifpni.org"), hrefs[j])
+          if (!item_url %in% exist_items) {
+            all_urls <- append(all_urls, item_url)
+            all_names <- append(all_names, page_names[j])
+            all_df <- data.frame("Name" = all_names, "URL" = all_urls)
 
-      for (j in 1:length(hrefs)) {
-        item_url <- paste0(c("http://ifpni.org"), hrefs[j])
-
-        if (!item_url %in% exist_items) {
-          all_urls <- append(all_urls, item_url)
-          all_names <- append(all_names, page_names[j])
-          all_df <- data.frame("Name" = all_names, "URL" = all_urls)
-          write.csv(all_df,
-                    output_file,
-                    row.names = FALSE)
+          }
         }
       }
+      write.csv(all_df,
+                output_file,
+                row.names = FALSE)
       Sys.sleep(1 / 3)
     }
     cli_progress_update()
