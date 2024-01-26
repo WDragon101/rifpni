@@ -4,7 +4,7 @@
 \alias{brief_information}
 \title{Get brief information return by basic_url, a dataframe contains "Name" and "URL".}
 \usage{
-brief_information(basic_url)
+brief_information(basic_url, output_file = "")
 }
 \arguments{
 \item{basic_url}{created by basic methods, such as basic_supragenus.}
@@ -17,25 +17,5 @@ Get brief information return by basic_url, a dataframe contains "Name" and "URL"
 }
 \examples{
 # Build initial URL
-# cla_basic_url <- basic_supragenus("cla", searchOnlyByFirstSymbols = "on")
-
-# Get the result entry based on the initial URL and generate a dataframe containing Name and URL.
-
-# cla_brief_information <- brief_information(cla_basic_url)
-# View entries
-cla_brief_information$Name
-
-# Select entries and build a vector of URLs. Note: there are two "Clavatorales".
-slt_cla_URLs <- cla_brief_information$URL[cla_brief_information$Name\%in\%c("Cladophorales", "Clavatorales", "Clavatoroideae")]
-slt_cla_URLs
-# [1] "http://ifpni.org/supragenus.htm?id=ABBBCF19-1A47-D7EE-18B4-88EB8B277D84"
-# [2] "http://ifpni.org/supragenus.htm?id=51571A09-482E-4A6D-8EB8-9B753EB1E397"
-# [3] "http://ifpni.org/supragenus.htm?id=8EDFC4C2-38B3-4E5C-AC5E-202AE551D872"
-# [4] "http://ifpni.org/supragenus.htm?id=E151FA37-059F-497D-9565-97D2427CC8D4"
-
-# Pass slt_cla_URLs to .detail_graber.
-detail_slt_cla <- detail_graber(slt_cla_URLs)
-str(detail_slt_cla)
-
 
 }

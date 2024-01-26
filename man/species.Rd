@@ -51,32 +51,40 @@ species() is used to implement retrieval from IFPNI's species list accroding to 
 \examples{
 # let's see how many taxa names contain "wes" in the species list on IFPNI.
 wes_species <- species("wes")
-nrow(wes_species)
-# [1] 33
-# What are they?
-wes_species$Name
- #[1] "Aclistochara westerbeckensis"     "Aralia westonii"
- #[3] "Berriochloa dawesensis"           "Betulites westii"
- #[5] "Bignonia westerhausiana"          "Calathiops westphalica"
- #[7] "Coelosphaeridium wesenbergense"   "Coniopteris westwaterensis"
- #[9] "Credneria westfalica"             "Cuneatopteris westfalensis"
- #[11] "Cycadoxylum westfalicum"          "Dewalquea westerhausiana"
- #[13] "Dryophyllum westphaliense"        "Expansisporites westphalensis"
- #[15] "Gleditsia wesselii"               "Gothania westfalica"
- #[17] "Hamamelites westphaliensis"       "Lepidocaryopsis westphalenii"
- #[19] "Phyllopteroides westralensis"     "Pityosporites westphalensis"
- #[21] "Porochara westerbeckensis"        "Quercus wesselii"
- #[23] "Quercus westfalica"               "Rhus westii"
- #[25] "Stipidium dawesense"              "Tempskya wesselii"
- #[27] "Thalassocharis westfalica"        "Trigonocarpum dawesii"
- #[29] "Valvisporites westphalensis"      "Vermiporella wesenbergensis"
- #[31] "Wessexia fibrosa"                 "Westersheimia pramelreuthensis"
- #[33] "Westphalensisporites irregularis"
 
-# see data/data/wes_species.rda for details.
 
 # Let's try the most daring operation.
 # If you do not pass a value to any argument, you get a dataframe that stores the details of all the taxa in the species list on IFPNI.
+# all_species_info <- species()
+# In the case that internet connection error, I suggest to use brief_information() and detail_graber().
 
-# This operation may take more than a whole day. See for the result.
+all_species_url <- basic_species()
+brief_all_species <- brief_information(all_species_url, "./data/brief_all_species.csv")
+
+# ✔ There are 44 pages found.
+# Collected 44 pages from IFPNI. Elapsed Time: 00:01:9.6
+# ✔ There are 432 items found.
+
+write.csv(brief_all_infragenus, "./data/brief_all_infragenus.csv")
+
+brief_all_infragenus_urls <- read.csv("./data/brief_all_infragenus.csv")$URL
+
+while (TRUE) {
+  tryCatch({
+    all_infragenus_info <- detail_graber(brief_all_infragenus_urls, output_file = "./data/all_infragenus_info.csv")
+   }, warning = function(w){
+      print(w)
+      cat("\n")
+      Sys.sleep(10)
+   }, error = function(e){
+      print(e)
+      cat("\n")
+      Sys.sleep(10)
+   }, finally = {
+      break
+   })
+}
+
+# Collected 432 items from IFPNI. Elapsed Time: 00:12:39.8
+# ── Done ─────────────────────────────────────────────────────────────
 }

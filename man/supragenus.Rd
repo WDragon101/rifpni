@@ -47,17 +47,20 @@ supragenus() is used to implement retrieval from IFPNI's supragenus list accrodi
 # For example: find all taxon names start with "cla"
 cla <- supragenus("cla", searchOnlyByFirstSymbols = "on")
 
-✔ There are 2 pages found.
-✔ There are 18items found.
-Collected 18 items from IFPNI. Costed 00:00:20.5
+# ✔ There are 2 pages found.
+# ✔ There are 18items found.
+# Collected 18 items from IFPNI. Costed 00:00:20.5
 
 
-# Get all items of supragenus
+# Let's try the most daring operation.
+# If you do not pass a value to any argument, you get a dataframe that stores the details of all the taxa in the supragenus list on IFPNI.
+
 # all_supragenus <- supragenus()
 #
 # ✔ There are 205 pages found.
 # Collected 205 pages from IFPNI. Elapsed Time: 00:05:31.9
 # ✔ There are 2049items found.
 # Collected 2049 items from IFPNI. Costed 00:51:41
+
 # see rifpni/data/all_supragenus_info.csv
 }

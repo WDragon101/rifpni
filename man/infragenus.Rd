@@ -46,21 +46,46 @@ infragenus() is used to implement retrieval from IFPNI's infragenus list accrodi
 \examples{
 # let's see how many taxa names contain "ty" in the infragenus list on IFPNI.
 ty_infragenus <- infragenus("ty")
-nrow(ty_infragenus)
-# [1] 16
-ty_infragenus$Name
- #[1] "Anomozamites Platypterygium"        "Calamites Arthropitys"
- #[3] "Calamites Arthropitys"              "Calamites Stylocalamites"
- #[5] "Calamites Stylocalamites"           "Dictyophyllum Camptopteris"
- #[7] "Filicites Dictyopteris"             "Fucoides Dictyotites"
- #[9] "Phlebopteris Dictyopteris"          "Pinites Pityanthus"
- #[11] "Pinites Pityocladus"                "Pinites Pityolepis"
- #[13] "Pinites Pityophyllum"               "Pinites Pityospermum"
- #[15] "Pissadendron Pitys"                 "Zosterophyllum Platyzosterophyllum"
 
-# see data/data/ty_infragenus.rda for details.
+#── Executing infragenus function ───────────────────────────────────────
+# ✔ There are 2 pages found.
+# ✔ There are 16 items found.
+# Collected 16 items from IFPNI. Elapsed Time: 00:00:28.5
+# ── Done ───────────────────────────────────────────────────────────────
 
 # Let's try the most daring operation.
 # If you do not pass a value to any argument, you get a dataframe that stores the details of all the taxa in the infragenus list on IFPNI.
 # all_infragenus <- infragenus()
+
+# In the case that internet connection error, I suggest to use brief_information() and detail_graber().
+
+all_infragenus_url <- basic_infragenus()
+brief_all_infragenus <- brief_information(all_infragenus_url)
+
+# ✔ There are 44 pages found.
+# Collected 44 pages from IFPNI. Elapsed Time: 00:01:9.6
+# ✔ There are 432 items found.
+
+write.csv(brief_all_infragenus, "./data/brief_all_infragenus.csv")
+
+brief_all_infragenus_urls <- read.csv("./data/brief_all_infragenus.csv")$URL
+
+while (TRUE) {
+  tryCatch({
+    all_infragenus_info <- detail_graber(brief_all_infragenus_urls, output_file = "./data/all_infragenus_info.csv")
+   }, warning = function(w){
+      print(w)
+      cat("\n")
+      Sys.sleep(10)
+   }, error = function(e){
+      print(e)
+      cat("\n")
+      Sys.sleep(10)
+   }, finally = {
+      break
+   })
+}
+
+# Collected 432 items from IFPNI. Elapsed Time: 00:12:39.8
+# ── Done ─────────────────────────────────────────────────────────────
 }

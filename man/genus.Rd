@@ -50,13 +50,28 @@ sor_genus <- genus("sor", searchOnlyByFirstSymbols = "on")
 # Let's try the most daring operation.
 # If you do not pass a value to any argument, you get a dataframe that stores the details of all the taxa in the genus list on IFPNI.
 
-# all_genus_url <- basic_genus()
-# brief_all_genus <- brief_information(all_genus_url)
-# write.csv(brief_all_genus, "/data/brief.all_genus.csv")
+all_genus_url <- basic_genus()
+brief_all_genus <- brief_information(all_genus_url)
+write.csv(brief_all_genus, "./data/brief.all_genus.csv")
 
 # ✔ There are 1754 pages found.
 # Collected 1754 pages from IFPNI. Elapsed Time: 01:31:21.3
 
-# all_genus_urls <- as.character(brief_all_genus$URL)
-# all_genus <- detail_graber(all_genus_urls)
+brief_all_genus_urls <- read.csv("./data/brief_all_genus.csv")$URL
+
+while (TRUE) {
+  tryCatch({
+    all_genus_info <- detail_graber(brief_all_genus_urls, output_file = "./data/all_genus_info.csv")
+   }, warning = function(w){
+      print(w)
+      cat("\n")
+      Sys.sleep(10)
+   }, error = function(e){
+      print(e)
+      cat("\n")
+      Sys.sleep(10)
+   }, finally = {
+      break
+   })
+}
 }
