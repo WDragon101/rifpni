@@ -140,11 +140,10 @@ brief_information <- function(basic_url, output_file = "") {
           if (!item_url %in% exist_items) {
             all_urls <- append(all_urls, item_url)
             all_names <- append(all_names, page_names[j])
-            all_df <- data.frame("Name" = all_names, "URL" = all_urls)
-
           }
         }
       }
+      all_df <- data.frame("Name" = all_names, "URL" = all_urls)
       write.csv(all_df,
                 output_file,
                 row.names = FALSE)
